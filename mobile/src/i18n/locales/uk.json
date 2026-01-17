@@ -1,0 +1,87 @@
+{
+  "app": {
+    "name": "TaskFlow"
+  },
+  "common": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "success": "Успішно",
+    "retry": "Повторити",
+    "close": "Закрити",
+    "camera": "Камера",
+    "gallery": "Обрати з галереї",
+    "seePhoto": "Переглянути фото"
+  },
+  "auth": {
+    "login": "Увійти",
+    "register": "Реєстрація",
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Ім'я",
+    "confirmPassword": "Підтвердіть пароль",
+    "forgotPassword": "Забули пароль?",
+    "noAccount": "Немає акаунту?",
+    "haveAccount": "Вже є акаунт?",
+    "signUp": "Зареєструватися",
+    "signIn": "Увійти",
+    "logout": "Вийти",
+    "welcome": "Ласкаво просимо до TaskFlow",
+    "welcomeDescription": "Керуйте своїми завданнями ефективно",
+    "validation": {
+      "emailRequired": "Email обов'язковий",
+      "emailInvalid": "Введіть коректний email",
+      "passwordRequired": "Пароль обов'язковий",
+      "passwordTooShort": "Пароль повинен містити мінімум 8 символів",
+      "nameRequired": "Ім'я обов'язкове",
+      "passwordsDoNotMatch": "Паролі не співпадають"
+    }
+  },
+  "tasks": {
+    "title": "Завдання",
+    "myTasks": "Мої завдання",
+    "addTask": "Додати завдання",
+    "editTask": "Редагувати завдання",
+    "noTasks": "Завдань немає",
+    "noTasksDescription": "Створіть своє перше завдання",
+    "taskTitle": "Назва завдання",
+    "taskDescription": "Опис",
+    "dueDate": "Термін виконання",
+    "priority": "Пріоритет",
+    "priorityLow": "Низький",
+    "priorityMedium": "Середній",
+    "priorityHigh": "Високий",
+    "markComplete": "Позначити виконаним",
+    "deleteTask": "Видалити завдання",
+    "deleteConfirm": "Ви впевнені, що хочете видалити це завдання?",
+    "taskCreated": "Завдання створено",
+    "taskUpdated": "Завдання оновлено",
+    "taskDeleted": "Завдання видалено",
+    "taskCompleted": "Завдання виконано!"
+  },
+  "profile": {
+    "title": "Профіль",
+    "editProfile": "Редагувати профіль",
+    "settings": "Налаштування",
+    "language": "Мова",
+    "changeAvatar": "Змінити аватар",
+    "takePhoto": "Зробити фото",
+    "chooseFromLibrary": "Обрати з галереї",
+    "avatarUploadFailed": "Не вдалося завантажити аватар"
+  },
+  "errors": {
+    "connectionTimeout": "Час очікування вичерпано. Спробуйте ще раз.",
+    "noInternetConnection": "Немає підключення до інтернету",
+    "sessionExpired": "Сесія закінчилась. Будь ласка, увійдіть знову.",
+    "resourceNotFound": "Ресурс не знайдено",
+    "tooManyRequests": "Забагато запитів. Зачекайте.",
+    "serverUnavailable": "Сервер тимчасово недоступний",
+    "unknownError": "Сталася невідома помилка",
+    "validationFailed": "Помилка валідації",
+    "badRequest": "Невірний запит",
+    "conflict": "Цей ресурс вже існує"
+  }
+}

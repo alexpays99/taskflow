@@ -1,0 +1,87 @@
+{
+  "app": {
+    "name": "TaskFlow"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "retry": "Retry",
+    "close": "Close",
+    "camera": "Camera",
+    "gallery": "Choose from Gallery",
+    "seePhoto": "See Photo"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "logout": "Logout",
+    "welcome": "Welcome to TaskFlow",
+    "welcomeDescription": "Manage your tasks efficiently",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "nameRequired": "Name is required",
+      "passwordsDoNotMatch": "Passwords do not match"
+    }
+  },
+  "tasks": {
+    "title": "Tasks",
+    "myTasks": "My Tasks",
+    "addTask": "Add Task",
+    "editTask": "Edit Task",
+    "noTasks": "No tasks yet",
+    "noTasksDescription": "Create your first task to get started",
+    "taskTitle": "Task Title",
+    "taskDescription": "Description",
+    "dueDate": "Due Date",
+    "priority": "Priority",
+    "priorityLow": "Low",
+    "priorityMedium": "Medium",
+    "priorityHigh": "High",
+    "markComplete": "Mark as Complete",
+    "deleteTask": "Delete Task",
+    "deleteConfirm": "Are you sure you want to delete this task?",
+    "taskCreated": "Task created successfully",
+    "taskUpdated": "Task updated successfully",
+    "taskDeleted": "Task deleted successfully",
+    "taskCompleted": "Task completed!"
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "settings": "Settings",
+    "language": "Language",
+    "changeAvatar": "Change Avatar",
+    "takePhoto": "Take Photo",
+    "chooseFromLibrary": "Choose from Library",
+    "avatarUploadFailed": "Failed to upload avatar"
+  },
+  "errors": {
+    "connectionTimeout": "Connection timeout. Please try again.",
+    "noInternetConnection": "No internet connection",
+    "sessionExpired": "Session expired. Please login again.",
+    "resourceNotFound": "Resource not found",
+    "tooManyRequests": "Too many requests. Please wait.",
+    "serverUnavailable": "Server is temporarily unavailable",
+    "unknownError": "An unknown error occurred",
+    "validationFailed": "Validation failed",
+    "badRequest": "Invalid request",
+    "conflict": "This resource already exists"
+  }
+}
