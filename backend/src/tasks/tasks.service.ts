@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { Task, Priority } from '@prisma/client';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
-import { TasksQueryDto } from './dto/tasks-query.dto';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
+import { Task } from "@prisma/client";
+import { PrismaService } from "../prisma/prisma.service";
+import { CreateTaskDto } from "./dto/create-task.dto";
+import { TasksQueryDto } from "./dto/tasks-query.dto";
+import { UpdateTaskDto } from "./dto/update-task.dto";
 
-export interface PaginatedTasks {
+interface PaginatedTasks {
   data: Task[];
   meta: {
     total: number;
@@ -16,7 +20,7 @@ export interface PaginatedTasks {
 }
 
 @Injectable()
-export class TasksService {
+class TasksService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(userId: string, query: TasksQueryDto): Promise<PaginatedTasks> {
@@ -29,8 +33,8 @@ export class TasksService {
       ...(isCompleted !== undefined && { isCompleted }),
       ...(search && {
         OR: [
-          { title: { contains: search, mode: 'insensitive' as const } },
-          { description: { contains: search, mode: 'insensitive' as const } },
+          { title: { contains: search, mode: "insensitive" as const } },
+          { description: { contains: search, mode: "insensitive" as const } },
         ],
       }),
     };
@@ -40,7 +44,7 @@ export class TasksService {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
       }),
       this.prisma.task.count({ where }),
     ]);
@@ -62,11 +66,11 @@ export class TasksService {
     });
 
     if (!task) {
-      throw new NotFoundException('Task not found');
+      throw new NotFoundException("Task not found");
     }
 
     if (task.userId !== userId) {
-      throw new ForbiddenException('Access denied');
+      throw new ForbiddenException("Access denied");
     }
 
     return task;
@@ -107,3 +111,5 @@ export class TasksService {
     });
   }
 }
+
+export { PaginatedTasks, TasksService };

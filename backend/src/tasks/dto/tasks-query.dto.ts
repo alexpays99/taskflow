@@ -1,9 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsInt, Min, IsEnum, IsBoolean, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
-import { Priority } from '@prisma/client';
+import { ApiProperty } from "@nestjs/swagger";
+import { Priority } from "@prisma/client";
+import { Transform } from "class-transformer";
+import {
+  IsBoolean,
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+  Min,
+} from "class-validator";
 
-export class TasksQueryDto {
+class TasksQueryDto {
   @ApiProperty({ default: 1, required: false })
   @IsOptional()
   @IsInt()
@@ -26,11 +33,16 @@ export class TasksQueryDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(({ value }) => value === "true" || value === true)
   isCompleted?: boolean;
 
-  @ApiProperty({ required: false, description: 'Search in title and description' })
+  @ApiProperty({
+    required: false,
+    description: "Search in title and description",
+  })
   @IsOptional()
   @IsString()
   search?: string;
 }
+
+export { TasksQueryDto };

@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@prisma/client';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { User } from "@prisma/client";
+import { PrismaService } from "../prisma/prisma.service";
+import { UpdateProfileDto } from "./dto/update-profile.dto";
 
 @Injectable()
-export class UsersService {
+class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: {
@@ -39,13 +39,15 @@ export class UsersService {
     });
   }
 
-  async getProfile(userId: string): Promise<Omit<User, 'password' | 'refreshToken'>> {
+  async getProfile(
+    userId: string,
+  ): Promise<Omit<User, "password" | "refreshToken">> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
 
     const { password, refreshToken, ...result } = user;
@@ -55,7 +57,7 @@ export class UsersService {
   async updateProfile(
     userId: string,
     dto: UpdateProfileDto,
-  ): Promise<Omit<User, 'password' | 'refreshToken'>> {
+  ): Promise<Omit<User, "password" | "refreshToken">> {
     const user = await this.prisma.user.update({
       where: { id: userId },
       data: dto,
@@ -68,7 +70,7 @@ export class UsersService {
   async updateAvatar(
     userId: string,
     avatarUrl: string,
-  ): Promise<Omit<User, 'password' | 'refreshToken'>> {
+  ): Promise<Omit<User, "password" | "refreshToken">> {
     const user = await this.prisma.user.update({
       where: { id: userId },
       data: { avatarUrl },
@@ -80,7 +82,7 @@ export class UsersService {
 
   async deleteAvatar(
     userId: string,
-  ): Promise<Omit<User, 'password' | 'refreshToken'>> {
+  ): Promise<Omit<User, "password" | "refreshToken">> {
     const user = await this.prisma.user.update({
       where: { id: userId },
       data: { avatarUrl: null },
@@ -90,3 +92,4 @@ export class UsersService {
     return result;
   }
 }
+export { UsersService };

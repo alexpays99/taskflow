@@ -1,22 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
+import { Priority } from "@prisma/client";
 import {
+  IsBoolean,
+  IsDateString,
+  IsEnum,
   IsOptional,
   IsString,
-  IsBoolean,
-  IsEnum,
-  IsDateString,
   MaxLength,
-} from 'class-validator';
-import { Priority } from '@prisma/client';
+} from "class-validator";
 
-export class UpdateTaskDto {
-  @ApiProperty({ example: 'Updated task title', required: false })
+class UpdateTaskDto {
+  @ApiProperty({ example: "Updated task title", required: false })
   @IsString()
   @IsOptional()
   @MaxLength(200)
   title?: string;
 
-  @ApiProperty({ example: 'Updated description', required: false })
+  @ApiProperty({ example: "Updated description", required: false })
   @IsString()
   @IsOptional()
   @MaxLength(1000)
@@ -32,8 +32,10 @@ export class UpdateTaskDto {
   @IsOptional()
   priority?: Priority;
 
-  @ApiProperty({ example: '2025-02-15T23:59:59Z', required: false })
+  @ApiProperty({ example: "2025-02-15T23:59:59Z", required: false })
   @IsDateString()
   @IsOptional()
   dueDate?: string;
 }
+
+export { UpdateTaskDto };

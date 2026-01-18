@@ -12,9 +12,13 @@ out/
 # Environment files
 .env
 .env.local
+.env.development
+.env.staging
+.env.production
 .env.development.local
 .env.test.local
 .env.production.local
+!.env.example
 
 # Logs
 logs
@@ -42,16 +46,19 @@ uploads/*
 !uploads/.gitkeep
 
 # Prisma
-prisma/migrations/.lock
+backend/node_modules/.prisma/
+backend/prisma/migrations/.lock
 
 # React Native
 *.jsbundle
 *.hbc
+mobile/.metro-health-check*
+mobile/metro-cache/
 
 # iOS
-ios/Pods/
-ios/build/
-*.xcworkspace
+mobile/ios/Pods/
+mobile/ios/build/
+mobile/ios/*.xcworkspace/xcuserdata/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -60,23 +67,35 @@ ios/build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata
+xcuserdata/
 *.xccheckout
 *.moved-aside
-DerivedData
+DerivedData/
 *.hmap
 *.ipa
 *.xcuserstate
+*.dSYM.zip
+*.dSYM
 
 # Android
-android/.gradle/
-android/app/build/
-android/build/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/build/
+mobile/android/.idea/
+mobile/android/local.properties
 *.apk
 *.aab
-local.properties
 
 # Temporary files
 *.tmp
 *.temp
 .cache
+
+# Generated/cached
+.babel_cache/
+.jest/
+*.tsbuildinfo
+
+# Lock files (optional - remove if you want to track them)
+# package-lock.json
+# yarn.lock
