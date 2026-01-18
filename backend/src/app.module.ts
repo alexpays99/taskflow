@@ -7,11 +7,13 @@ import { PrismaModule } from "./prisma/prisma.module";
 import { TasksModule } from "./tasks/tasks.module";
 import { UsersModule } from "./users/users.module";
 
+const envFile = `.env.${process.env.NODE_ENV || "development"}`;
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ".env",
+      envFilePath: [envFile, ".env"],
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "uploads"),
