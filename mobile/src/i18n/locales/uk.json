@@ -14,7 +14,8 @@
     "close": "Закрити",
     "camera": "Камера",
     "gallery": "Обрати з галереї",
-    "seePhoto": "Переглянути фото"
+    "seePhoto": "Переглянути фото",
+    "openSettings": "Відкрити налаштування"
   },
   "auth": {
     "login": "Увійти",
@@ -70,7 +71,10 @@
     "changeAvatar": "Змінити аватар",
     "takePhoto": "Зробити фото",
     "chooseFromLibrary": "Обрати з галереї",
-    "avatarUploadFailed": "Не вдалося завантажити аватар"
+    "avatarUploadFailed": "Не вдалося завантажити аватар",
+    "cameraPermissionDenied": "Доступ до камери заборонено. Увімкніть його в налаштуваннях.",
+    "cameraPermissionTitle": "Доступ до камери",
+    "cameraPermissionMessage": "Додаток потребує доступ до камери для фото"
   },
   "errors": {
     "connectionTimeout": "Час очікування вичерпано. Спробуйте ще раз.",

@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AxiosError } from 'axios';
-import { useAuthStore } from '../stores/authStore';
-import { LoginFormData, loginSchema } from '../types';
-import { handleApiError } from '@/shared/api/errorHandler';
+import { handleApiError } from "@/shared/api/errorHandler";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAuthStore } from "../stores/authStore";
+import { LoginFormData, loginSchema } from "../types";
 
 export function useLogin() {
   const [error, setError] = useState<string | null>(null);
@@ -13,8 +13,8 @@ export function useLogin() {
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -24,11 +24,13 @@ export function useLogin() {
       try {
         await login(data);
       } catch (e) {
-        const apiError = handleApiError(e as AxiosError);
-        setError(apiError.message);
+        if (e instanceof Error) {
+          const apiError = handleApiError(e as AxiosError<unknown>);
+          setError(apiError.message);
+        }
       }
     },
-    [login]
+    [login],
   );
 
   const onSubmit = form.handleSubmit(handleLogin);

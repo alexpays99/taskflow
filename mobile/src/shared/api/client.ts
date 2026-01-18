@@ -1,25 +1,27 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { API_CONFIG, ENDPOINTS } from '@/shared/constants';
-import { tokenStorage } from '@/shared/utils/storage';
+import { API_CONFIG, ENDPOINTS } from "@/shared/constants";
+import { logger } from "@/shared/utils/logger";
+import { tokenStorage } from "@/shared/utils/storage";
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 export const apiClient = axios.create({
   baseURL: API_CONFIG.baseUrl,
   timeout: API_CONFIG.timeout,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
-// Request interceptor - add auth token
+// Request interceptor - add auth token + logging
 apiClient.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const token = tokenStorage.getAccessToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    logger.request(config);
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Response interceptor - handle token refresh
@@ -41,8 +43,12 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 };
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    logger.response(response);
+    return response;
+  },
   async (error: AxiosError) => {
+    logger.httpError(error);
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
@@ -76,7 +82,7 @@ apiClient.interceptors.response.use(
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },
-          }
+          },
         );
 
         const { accessToken, refreshToken: newRefreshToken } = response.data;
@@ -97,7 +103,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

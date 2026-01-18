@@ -14,7 +14,8 @@
     "close": "Close",
     "camera": "Camera",
     "gallery": "Choose from Gallery",
-    "seePhoto": "See Photo"
+    "seePhoto": "See Photo",
+    "openSettings": "Open Settings"
   },
   "auth": {
     "login": "Login",
@@ -70,7 +71,10 @@
     "changeAvatar": "Change Avatar",
     "takePhoto": "Take Photo",
     "chooseFromLibrary": "Choose from Library",
-    "avatarUploadFailed": "Failed to upload avatar"
+    "avatarUploadFailed": "Failed to upload avatar",
+    "cameraPermissionDenied": "Camera permission denied. Please enable it in settings.",
+    "cameraPermissionTitle": "Camera Permission",
+    "cameraPermissionMessage": "App needs camera access to take photos"
   },
   "errors": {
     "connectionTimeout": "Connection timeout. Please try again.",

@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { tokenStorage } from '@/shared/utils/storage';
-import { authApi } from '../api/authApi';
-import { User, LoginFormData, RegisterFormData } from '../types';
+import { tokenStorage } from "@/shared/utils/storage";
+import { create } from "zustand";
+import { authApi } from "../api/authApi";
+import { LoginFormData, RegisterFormData, User } from "../types";
 
 interface AuthStore {
   user: User | null;

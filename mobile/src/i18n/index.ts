@@ -1,18 +1,19 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import en from './locales/en.json';
-import uk from './locales/uk.json';
-import { storage, StorageKeys } from '@/shared/utils/storage';
+import { storage, StorageKeys } from "@/shared/utils/storage";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import en from "./locales/en.json";
+import uk from "./locales/uk.json";
 
-const savedLanguage = storage.getString(StorageKeys.LANGUAGE) || 'en';
+const savedLanguage = storage.getString(StorageKeys.LANGUAGE) || "en";
 
 i18n.use(initReactI18next).init({
+  compatibilityJSON: "v3",
   resources: {
     en: { translation: en },
     uk: { translation: uk },
   },
   lng: savedLanguage,
-  fallbackLng: 'en',
+  fallbackLng: "en",
   interpolation: {
     escapeValue: false,
   },

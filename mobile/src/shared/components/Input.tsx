@@ -28,14 +28,14 @@ export const Input: React.FC<InputProps> = ({
 
   const containerStyle = [
     styles.inputContainer,
-    isFocused && styles.inputContainer_focused,
-    error && styles.inputContainer_error,
-  ];
+    isFocused ? styles.inputContainer_focused : undefined,
+    error ? styles.inputContainer_error : undefined,
+  ].filter(Boolean);
 
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <View style={containerStyle}>
+      <View style={containerStyle as any}>
         <TextInput
           style={[styles.input, style]}
           placeholderTextColor={Colors.text.secondary}

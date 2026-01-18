@@ -1,6 +1,10 @@
+import Config from 'react-native-config';
+
 export const API_CONFIG = {
-  baseUrl: __DEV__ ? 'http://localhost:3000' : 'https://api.taskflow.app',
+  baseUrl: Config.API_URL || 'http://localhost:3000',
   timeout: 30000,
+  env: Config.ENV || 'development',
+  appName: Config.APP_NAME || 'TaskFlow',
 } as const;
 
 export const ENDPOINTS = {

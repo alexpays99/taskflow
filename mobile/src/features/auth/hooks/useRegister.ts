@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AxiosError } from 'axios';
-import { useAuthStore } from '../stores/authStore';
-import { RegisterFormData, registerSchema } from '../types';
-import { handleApiError } from '@/shared/api/errorHandler';
+import { handleApiError } from "@/shared/api/errorHandler";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAuthStore } from "../stores/authStore";
+import { RegisterFormData, registerSchema } from "../types";
 
 export function useRegister() {
   const [error, setError] = useState<string | null>(null);
@@ -13,9 +13,9 @@ export function useRegister() {
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      email: '',
-      password: '',
-      name: '',
+      email: "",
+      password: "",
+      name: "",
     },
   });
 
@@ -25,11 +25,13 @@ export function useRegister() {
       try {
         await register(data);
       } catch (e) {
-        const apiError = handleApiError(e as AxiosError);
-        setError(apiError.message);
+        if (e instanceof Error) {
+          const apiError = handleApiError(e as AxiosError<unknown>);
+          setError(apiError.message);
+        }
       }
     },
-    [register]
+    [register],
   );
 
   const onSubmit = form.handleSubmit(handleRegister);

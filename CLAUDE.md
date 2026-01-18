@@ -251,14 +251,132 @@ cd mobile && npm test -- --coverage
 
 ## Mapping від HubX Flutter
 
-Детальний маппінг патернів: `docs/hubx-to-react-native-mapping.md`
+| Flutter (HubX)           | React Native (TaskFlow)        |
+|--------------------------|--------------------------------|
+| BLoC/Cubit               | Zustand + TanStack Query       |
+| GoRouter                 | React Navigation               |
+| Dio                      | Axios                          |
+| easy_localization        | i18next                        |
+| flutter_secure_storage   | react-native-mmkv              |
+| GetIt                    | Direct imports                 |
+| freezed                  | TypeScript + Zod               |
 
-| Flutter (HubX) | React Native (TaskFlow) |
-|----------------|-------------------------|
-| BLoC/Cubit | Zustand + TanStack Query |
-| GoRouter | React Navigation |
-| Dio | Axios |
-| easy_localization | i18next |
-| flutter_secure_storage | react-native-mmkv |
-| GetIt | Direct imports |
-| freezed | TypeScript + Zod |
+---
+
+## Flutter vs React Native — Команди
+
+### Пакетний менеджер
+
+| Дія                      | Flutter                        | React Native (npm)             |
+|--------------------------|--------------------------------|--------------------------------|
+| Встановити залежності    | `flutter pub get`              | `npm install`                  |
+| Додати пакет             | `flutter pub add axios`        | `npm install axios`            |
+| Додати dev-пакет         | `flutter pub add --dev mockito`| `npm install --save-dev jest`  |
+| Видалити пакет           | `flutter pub remove axios`     | `npm uninstall axios`          |
+| Оновити пакети           | `flutter pub upgrade`          | `npm update`                   |
+
+### Файли залежностей
+
+| Flutter                  | React Native                   |
+|--------------------------|--------------------------------|
+| `pubspec.yaml`           | `package.json`                 |
+| `pubspec.lock`           | `package-lock.json`            |
+| `.pub-cache/` (глобально)| `node_modules/` (локально)     |
+
+### Запуск проекту
+
+| Дія                      | Flutter                        | React Native                   |
+|--------------------------|--------------------------------|--------------------------------|
+| Запустити Android        | `flutter run`                  | `npm run android`              |
+| Запустити iOS            | `flutter run`                  | `npm run ios`                  |
+| Запустити bundler        | —                              | `npm start`                    |
+| Hot reload               | `r` в терміналі                | Автоматично                    |
+
+### Тестування
+
+| Дія                      | Flutter                        | React Native                   |
+|--------------------------|--------------------------------|--------------------------------|
+| Всі тести                | `flutter test`                 | `npm test`                     |
+| З coverage               | `flutter test --coverage`      | `npm test -- --coverage`       |
+| Watch режим              | —                              | `npm test -- --watch`          |
+
+### Перевірка коду
+
+| Дія                      | Flutter                        | React Native                   |
+|--------------------------|--------------------------------|--------------------------------|
+| Аналіз типів             | `dart analyze`                 | `npx tsc --noEmit`             |
+| Лінтер                   | `dart analyze`                 | `npm run lint`                 |
+
+### Збірка
+
+| Дія                      | Flutter                        | React Native                              |
+|--------------------------|--------------------------------|-------------------------------------------|
+| Build APK                | `flutter build apk`            | `cd android && ./gradlew assembleRelease` |
+| Build AAB                | `flutter build appbundle`      | `cd android && ./gradlew bundleRelease`   |
+
+### npx vs npm
+
+```
+npm  — пакетний менеджер (встановлює пакети)
+npx  — запускає пакети без глобальної установки
+```
+
+| Команда                  | Що робить                                        |
+|--------------------------|--------------------------------------------------|
+| `npm install jest`       | Встановлює jest в node_modules                   |
+| `npx jest`               | Запускає jest                                    |
+| `npm run test`           | Запускає скрипт "test" з package.json            |
+| `npx tsc --noEmit`       | Запускає TypeScript compiler (перевірка типів)   |
+
+### Розбір команди
+
+```
+npx tsc --noEmit 2>&1 | head -30
+
+npx                 — запустити пакет без глобальної установки
+tsc                 — TypeScript Compiler
+--noEmit            — не створювати JS файли (тільки перевірити типи)
+2>&1                — об'єднати stderr і stdout в один потік
+| head -30          — показати тільки перші 30 рядків
+```
+
+### Scripts в package.json
+
+```json
+{
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit"
+  }
+}
+```
+
+Запуск: `npm run <назва_скрипта>`
+
+### Швидка шпаргалка
+
+```bash
+npm install              # = flutter pub get
+npm run android          # = flutter run (Android)
+npm run ios              # = flutter run (iOS)
+npm start                # Metro bundler
+npm test                 # = flutter test
+npm run lint             # = dart analyze
+npx tsc --noEmit         # перевірка TypeScript
+npm install axios        # = flutter pub add axios
+```
+
+### Конфігураційні файли
+
+| Flutter                  | React Native                   | Призначення                    |
+|--------------------------|--------------------------------|--------------------------------|
+| `pubspec.yaml`           | `package.json`                 | Залежності                     |
+| `analysis_options.yaml`  | `.eslintrc.js`                 | Лінтер                         |
+| —                        | `tsconfig.json`                | TypeScript                     |
+| —                        | `babel.config.js`              | Транспіляція JS                |
+| —                        | `metro.config.js`              | Bundler                        |
+| —                        | `jest.config.js`               | Тести                          |

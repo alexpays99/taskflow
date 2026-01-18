@@ -1,6 +1,6 @@
-import apiClient from '@/shared/api/client';
-import { ENDPOINTS } from '@/shared/constants';
-import { User } from '@/features/auth/types';
+import { User } from "@/features/auth/types";
+import apiClient from "@/shared/api/client";
+import { ENDPOINTS } from "@/shared/constants";
 
 interface UpdateProfileData {
   name?: string;
@@ -19,21 +19,26 @@ export const profileApi = {
 
   uploadAvatar: async (imagePath: string): Promise<User> => {
     const formData = new FormData();
-    const filename = imagePath.split('/').pop() || 'avatar.jpg';
+    const filename = imagePath.split("/").pop() || "avatar.jpg";
     const match = /\.(\w+)$/.exec(filename);
-    const type = match ? `image/${match[1]}` : 'image/jpeg';
+    const ext = match ? match[1].toLowerCase() : "jpeg";
+    const type = `image/${ext === "jpg" ? "jpeg" : ext}`;
 
-    formData.append('avatar', {
+    formData.append("avatar", {
       uri: imagePath,
       name: filename,
       type,
     } as any);
 
-    const response = await apiClient.post<User>(ENDPOINTS.users.avatar, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+    const response = await apiClient.post<User>(
+      ENDPOINTS.users.avatar,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    });
+    );
     return response.data;
   },
 

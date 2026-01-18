@@ -1,21 +1,21 @@
-import React from 'react';
+import { MainStackParamList } from "@/app/navigation/types";
+import { useAuthStore } from "@/features/auth/stores/authStore";
+import { Colors, SPACING } from "@/shared/constants";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
-  View,
-  StyleSheet,
+  Alert,
   SafeAreaView,
   ScrollView,
-  Alert,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useTranslation } from 'react-i18next';
-import { Colors, SPACING } from '@/shared/constants';
-import { useAuthStore } from '@/features/auth/stores/authStore';
-import { ProfileHeader } from '../components/ProfileHeader';
-import { SettingsItem } from '../components/SettingsItem';
-import { MainStackParamList } from '@/app/navigation/types';
+  StyleSheet,
+  View,
+} from "react-native";
+import { ProfileHeader } from "../components/ProfileHeader";
+import { SettingsItem } from "../components/SettingsItem";
 
-type NavigationProp = NativeStackNavigationProp<MainStackParamList, 'Profile'>;
+type NavigationProp = NativeStackNavigationProp<MainStackParamList, "Profile">;
 
 export const ProfileScreen: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -23,18 +23,18 @@ export const ProfileScreen: React.FC = () => {
   const { user, logout } = useAuthStore();
 
   const handleLogout = () => {
-    Alert.alert(t('auth.logout'), 'Are you sure you want to logout?', [
-      { text: t('common.cancel'), style: 'cancel' },
+    Alert.alert(t("auth.logout"), "Are you sure you want to logout?", [
+      { text: t("common.cancel"), style: "cancel" },
       {
-        text: t('auth.logout'),
-        style: 'destructive',
+        text: t("auth.logout"),
+        style: "destructive",
         onPress: logout,
       },
     ]);
   };
 
   const handleChangeLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'uk' : 'en';
+    const newLang = i18n.language === "en" ? "uk" : "en";
     i18n.changeLanguage(newLang);
   };
 
@@ -47,19 +47,19 @@ export const ProfileScreen: React.FC = () => {
 
         <View style={styles.section}>
           <SettingsItem
-            label={t('profile.editProfile')}
-            onPress={() => navigation.navigate('EditProfile')}
+            label={t("profile.editProfile")}
+            onPress={() => navigation.navigate("EditProfile")}
           />
           <SettingsItem
-            label={t('profile.language')}
-            value={i18n.language === 'en' ? 'English' : 'Українська'}
+            label={t("profile.language")}
+            value={i18n.language === "en" ? "English" : "Українська"}
             onPress={handleChangeLanguage}
           />
         </View>
 
         <View style={styles.section}>
           <SettingsItem
-            label={t('auth.logout')}
+            label={t("auth.logout")}
             onPress={handleLogout}
             showArrow={false}
             isDestructive

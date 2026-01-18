@@ -7,12 +7,12 @@ export interface ApiError {
 }
 
 interface ValidationErrorResponse {
-  message: string | string[];
+  message?: string | string[];
   error?: string;
   statusCode?: number;
 }
 
-export function handleApiError(error: AxiosError<ValidationErrorResponse>): ApiError {
+export function handleApiError(error: AxiosError<unknown>): ApiError {
   if (!error.response) {
     if (error.code === 'ECONNABORTED') {
       return {
@@ -27,15 +27,19 @@ export function handleApiError(error: AxiosError<ValidationErrorResponse>): ApiE
   }
 
   const status = error.response.status;
-  const data = error.response.data;
+  const data = error.response.data as ValidationErrorResponse | undefined;
+
+  const getMessage = (): string => {
+    if (!data || typeof data !== 'object') return '';
+    if (Array.isArray(data.message)) return data.message[0] || '';
+    return data.message?.toString() || '';
+  };
 
   switch (status) {
     case 400:
       return {
         type: 'validation',
-        message: Array.isArray(data.message)
-          ? data.message[0]
-          : data.message || 'errors.bad_request',
+        message: getMessage() || 'errors.bad_request',
       };
 
     case 401:
@@ -54,15 +58,13 @@ export function handleApiError(error: AxiosError<ValidationErrorResponse>): ApiE
     case 409:
       return {
         type: 'validation',
-        message: data.message?.toString() || 'errors.conflict',
+        message: getMessage() || 'errors.conflict',
       };
 
     case 422:
       return {
         type: 'validation',
-        message: Array.isArray(data.message)
-          ? data.message[0]
-          : data.message || 'errors.validation_failed',
+        message: getMessage() || 'errors.validation_failed',
       };
 
     case 429:
