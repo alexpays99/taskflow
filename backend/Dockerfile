@@ -26,3 +26,4 @@ RUN mkdir -p uploads
 EXPOSE 3000
 
 CMD ["npm", "run", "start:prod"]
+
